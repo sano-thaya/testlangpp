@@ -1,0 +1,7 @@
+*.class
+*.log
+generated/
+out/
+target/
+.idea/
+.vscode/

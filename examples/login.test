@@ -1,0 +1,7 @@
+// My first TestLang++ test
+
+test Login {
+  GET "http://localhost:8080/api/users/42";
+  expect status = 200;
+  expect body contains "\"id\": 42";
+}

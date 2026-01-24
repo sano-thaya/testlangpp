@@ -1,0 +1,5 @@
+test Hello {
+  GET "http://example.com";
+  expect status = 200;
+  expect body contains "Example";
+}
