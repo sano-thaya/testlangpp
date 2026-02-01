@@ -1,0 +1,45 @@
+package parser;
+
+import lexer.TestLangLexer;
+import java_cup.runtime.Symbol;
+
+/* --------- Parser Class --------- */
+parser code {:
+    public Parser(TestLangLexer lexer) {
+        super(lexer);
+    }
+:}
+
+/* --------- Terminals (TOKENS) --------- */
+terminal TEST, GET, POST, PUT, DELETE;
+terminal EXPECT, STATUS, BODY, CONTAINS;
+terminal IDENT, NUMBER, STRING;
+terminal LBRACE, RBRACE, SEMICOLON, EQUALS;
+
+/* --------- Non-terminals --------- */
+non terminal program, test_block, statements, statement;
+
+/* --------- Start Symbol ---------- */
+start with program;
+
+/* --------- Grammar Rules --------- */
+program ::= test_block ;
+
+test_block ::=
+      TEST IDENT LBRACE statements RBRACE
+      {: System.out.println("Parsed test block successfully"); :}
+    ;
+
+statements ::=
+      statements statement
+    | statement
+    ;
+
+statement ::=
+      GET STRING SEMICOLON
+    | POST STRING SEMICOLON
+    | PUT STRING SEMICOLON
+    | DELETE STRING SEMICOLON
+    | EXPECT STATUS EQUALS NUMBER SEMICOLON
+    | EXPECT BODY CONTAINS STRING SEMICOLON
+    ;
